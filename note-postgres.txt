@@ -1,0 +1,21 @@
+1.mkdir folder DB in NFS
+cd /var/nfs/k8sdev/database
+mkdir mxtest
+
+2.Edit new scripts replace with command
+:%s/pattern/replace/
+
+3.deployment
+kubectl apply -f dbpvc.yaml -n database
+kubectl apply -f postgres-deployment.yaml -n database
+
+3.delete db0
+
+4.create folder for tablespace (manual inside pod)
+MXTEST
+/var/lib/postgresql/data/MXTEST/mxtestdata
+
+delete
+kubectl delete -f postgres-deployment.yaml -n database
+kubectl delete -f dbpvc.yaml -n database
+delete folder in pvc NFS
