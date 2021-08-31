@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mxdtkdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-mxdtkdb
+  template:
+    metadata:
+      labels:
+        app: postgres-mxdtkdb
+    spec:
+      containers:
+        - name: postgres
+          image: registry.kiatnakinbank.com/common_image/postgres:13.3
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "1"
+            limits:
+              memory: "8Gi"
+              cpu: "4"
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: db0
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: isylzjkodev
+          volumeMounts:
+            - name: postgres
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: mxdtkdb-pvc
+      imagePullSecrets:
+        - name: harbor-registry
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-mxdtkdb
+  labels:
+    app: postgres-mxdtkdb
+spec:
+  ports:
+    - name: postgres-mxdtkdb
+      port: 5432
+      nodePort: 30433
+  type: NodePort
+  selector:
+    app: postgres-mxdtkdb
