@@ -1,6 +1,8 @@
 docker run --name oracle-19c -p 1521:1521 -e ORACLE_SID=ABCDB -e ORACLE_PWD=Passw0rd -e ORACLE_CHARACTERSET=WE8MSWIN1252 -v /data/oracle-19c/oradata/:/opt/oracle/oradata doctorkirk/oracle-19c
 docker run -d -p 8089:8088 --name superset apache/superset
 docker run -d -p 80:80 --name dbtool dbtool
+docker run --rm -d -p 8080:8080 camandel/web-password-generator
+
 
 root@MONMIDD01B:~#:[DEV] docker ps -a
 CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                 PORTS                                       NAMES
