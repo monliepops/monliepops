@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mxdtkdb-pv
+  namespace: database
+  labels:
+    app: mxdtkdb
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1G
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    server: 10.3.113.169
+    path: "/share/nfs/database/mxdtkdb"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mxdtkdb-pvc
+  namespace: database
+  labels:
+    app: mxdtkdb
+spec:
+  volumeName: mxdtkdb-pv
+  storageClassName: ""
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 100M
