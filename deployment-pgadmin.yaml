@@ -21,6 +21,7 @@ spec:
             - name: PGADMIN_PORT
               value: "80"
           image: "dpage/pgadmin4:latest"
+          imagePullPolicy: Always
           name: pgadmin4
           ports:
             - containerPort: 80
