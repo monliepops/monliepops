@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: pgadmin-pv
+  namespace: database
+  labels:
+    app: pgadmin
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1G
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    server: 10.3.105.69
+    path: "/var/nfs/k8sdev/database/pgadmin"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pgadmin-pvc
+  namespace: database
+  labels:
+    app: pgadmin
+spec:
+  volumeName: pgadmin-pv
+  storageClassName: ""
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 100M
