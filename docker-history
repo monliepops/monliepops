@@ -1,0 +1,11 @@
+docker run --name oracle-19c -p 1521:1521 -e ORACLE_SID=ABCDB -e ORACLE_PWD=Passw0rd -e ORACLE_CHARACTERSET=WE8MSWIN1252 -v /data/oracle-19c/oradata/:/opt/oracle/oradata doctorkirk/oracle-19c
+docker run -d -p 8089:8088 --name superset apache/superset
+docker run -d -p 80:80 --name dbtool dbtool
+
+root@MONMIDD01B:~#:[DEV] docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                 PORTS                                       NAMES
+d4d371c57d35   doctorkirk/oracle-19c   "/bin/sh -c 'exec $O…"   8 days ago     Up 8 days (healthy)    0.0.0.0:1521->1521/tcp, :::1521->1521/tcp   oracle-19c
+47c41723c711   apache/superset         "/bin/sh -c /usr/bin…"   6 weeks ago    Up 6 weeks (healthy)   0.0.0.0:8089->8088/tcp, :::8089->8088/tcp   superset
+86716a2d53a7   dbtool                  "/docker-entrypoint.…"   7 weeks ago    Up 7 weeks             0.0.0.0:80->80/tcp, :::80->80/tcp           dbtool
+06dcae126249   ankane/pghero           "/bin/sh -c 'puma -C…"   2 months ago   Up 2 months            0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   upbeat_lovelace
+9bcb2eb078a8   coleifer/sqlite-web     "/bin/sh -c 'sqlite_…"   2 months ago   Up 2 months            0.0.0.0:8082->8080/tcp, :::8082->8080/tcp   practical_ganguly
