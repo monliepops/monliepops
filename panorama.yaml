@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: panorama
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: panorama
+  template:
+    metadata:
+      labels:
+        app: panorama
+    spec:
+      containers:
+        - image: "rammpeter/panorama:latest"
+          imagePullPolicy: Always
+          name: panorama
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: "100m"
+              memory: 500Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: panorama
+  labels:
+    app: panorama
+spec:
+  selector:
+    app: panorama
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30083
