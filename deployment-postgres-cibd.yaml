@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cibdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: registry.kiatnakinbank.com/common_image/postgres:13.4
+          imagePullPolicy: "IfNotPresent"
+          resources:
+            requests:
+              memory: "500Mi"
+              cpu: "1"
+            limits:
+              memory: "8Gi"
+              cpu: "4"
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: CIBDB
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: isylzjkodev
+          volumeMounts:
+            - name: postgres
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+      volumes:
+        - name: postgres
+          persistentVolumeClaim:
+            claimName: cibdb-pvc
+      imagePullSecrets:
+        - name: harbor-registry
+---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: postgres
+      labels:
+        app: postgres
+    spec:
+       ports:
+        - name: postgres
+          port: 5432
+          nodePort: 30435
+       type: NodePort
+       selector:
+        app: postgres
