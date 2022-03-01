@@ -2,7 +2,7 @@ docker run --name oracle-19c -p 1521:1521 -e ORACLE_SID=ABCDB -e ORACLE_PWD=Pass
 docker run -d -p 8089:8088 --name superset apache/superset
 docker run -d -p 80:80 --name dbtool dbtool
 docker run --rm -d -p 8080:8080 camandel/web-password-generator
-
+docker run -ti -e DATABASE_URL=postgres://postgres:isylzjkodev@10.3.104.50:5432/mxdtkdb -p 8081:8080 ankane/pghero
 
 root@MONMIDD01B:~#:[DEV] docker ps -a
 CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                 PORTS                                       NAMES
