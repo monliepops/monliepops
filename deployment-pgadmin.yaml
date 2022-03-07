@@ -20,7 +20,7 @@ spec:
               value: pgadmin
             - name: PGADMIN_PORT
               value: "80"
-          image: "dpage/pgadmin4:latest"
+          image: "dpage/pgadmin4:snapshot"
           imagePullPolicy: Always
           name: pgadmin4
           ports:
