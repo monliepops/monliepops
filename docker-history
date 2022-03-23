@@ -4,6 +4,11 @@ docker run -d -p 80:80 --name dbtool dbtool
 docker run --rm -d -p 8080:8080 camandel/web-password-generator
 docker run -ti -e DATABASE_URL=postgres://postgres:isylzjkodev@10.3.104.50:5432/mxdtkdb -p 8081:8080 ankane/pghero
 
+
+note : 
+
+ docker run -d -p 8083:80 -v /web:/usr/share/nginx/html --name dbtool_volumn nginx
+
 root@MONMIDD01B:~#:[DEV] docker ps -a
 CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                 PORTS                                       NAMES
 d4d371c57d35   doctorkirk/oracle-19c   "/bin/sh -c 'exec $O…"   8 days ago     Up 8 days (healthy)    0.0.0.0:1521->1521/tcp, :::1521->1521/tcp   oracle-19c
