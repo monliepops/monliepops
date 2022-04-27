@@ -6,21 +6,18 @@ data:
   pghero.yml: |-
     databases:
       main:
-        url: postgres://pghero:postgres4hero@10.3.150.72:5432/postgres?sslmode=disable
+        url: postgres://pghero:postgres4hero@10.3.150.43:5432/postgres?sslmode=disable
       etaxdb:
-        url: postgres://pghero:postgres4hero@10.3.150.72:5432/etaxdb?sslmode=disable
+        url: postgres://pghero:postgres4hero@10.3.150.43:5432/etaxdb?sslmode=disable
         capture_query_stats: main
-        capture_space_stats: etaxdb
-      etaxdb-replica:
-        url: postgres://pghero:postgres4hero@10.3.150.73:5432/etaxdb?sslmode=disable
       epmdb:
-        url: postgres://pghero:postgres4hero@10.3.150.72:5432/epmdb?sslmode=disable
+        url: postgres://pghero:postgres4hero@10.3.150.43:5432/epmdb?sslmode=disable
         capture_query_stats: main
       dmsdb:
-        url: postgres://pghero:postgres4hero@10.3.150.72:5432/dmsdb?sslmode=disable
+        url: postgres://pghero:postgres4hero@10.3.150.43:5432/dmsdb?sslmode=disable
         capture_query_stats: main
       signdb:
-        url: postgres://pghero:postgres4hero@10.3.150.72:5432/signdb?sslmode=disable
+        url: postgres://pghero:postgres4hero@10.3.150.43:5432/signdb?sslmode=disable
         capture_query_stats: main
 
     # Minimum time for long running queries
