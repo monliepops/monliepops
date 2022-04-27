@@ -5,20 +5,20 @@ metadata:
 data:
   pghero.yml: |-
     databases:
-      main:
+      main-epm:
         url: postgres://pghero:postgres4hero@10.3.150.43:5432/postgres?sslmode=disable
       etaxdb:
         url: postgres://pghero:postgres4hero@10.3.150.43:5432/etaxdb?sslmode=disable
-        capture_query_stats: main
+        capture_query_stats: main-epm
       epmdb:
         url: postgres://pghero:postgres4hero@10.3.150.43:5432/epmdb?sslmode=disable
-        capture_query_stats: main
+        capture_query_stats: main-epm
       dmsdb:
         url: postgres://pghero:postgres4hero@10.3.150.43:5432/dmsdb?sslmode=disable
-        capture_query_stats: main
+        capture_query_stats: main-epm
       signdb:
         url: postgres://pghero:postgres4hero@10.3.150.43:5432/signdb?sslmode=disable
-        capture_query_stats: main
+        capture_query_stats: main-epm
 
     # Minimum time for long running queries
     # long_running_query_sec: 60
