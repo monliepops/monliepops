@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pghero
+data:
+  pghero.yml: |-
+    databases:
+	  az-sit-mx:
+	    url: postgres://pghero:p0stgres4HERO@psql-mx-sit.postgres.database.azure.com:5432/postgres?sslmode=require
+	  mxcrmpdb:
+	    url: postgres://pghero:p0stgres4HERO@psql-mx-sit.postgres.database.azure.com:5432/mxcrmpdb?sslmode=require
+	    capture_query_stats: az-sit-mx
+	  mxcbodb:
+	    url: postgres://pghero:p0stgres4HERO@psql-mx-sit.postgres.database.azure.com:5432/mxcbodb?sslmode=require
+	    capture_query_stats: az-sit-mx
+	  mxdpmsdb:
+	    url: postgres://pghero:p0stgres4HERO@psql-mx-sit.postgres.database.azure.com:5432/mxdpmsdb?sslmode=require
+	    capture_query_stats: az-sit-mx
+
+    # Minimum time for long running queries
+    # long_running_query_sec: 60
+
+    # Minimum average time for slow queries
+    # slow_query_ms: 20
+
+    # Minimum calls for slow queries
+    # slow_query_calls: 100
+
+    # Minimum connections for high connections warning
+    # total_connections_threshold: 500
+
+    # Statement timeout for explain
+    # explain_timeout_sec: 10
+
+    # Time zone
+    # time_zone: "Pacific Time (US & Canada)"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pghero
+  labels:
+    app: pghero
+spec:
+  selector:
+    app: pghero
+  type: NodePort
+  ports:
+    - port: 8080
+      nodePort: 30088
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pghero
+  labels:
+    app: pghero
+spec:
+  selector:
+    matchLabels:
+      app: pghero
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pghero
+    spec:
+      containers:
+      - name: pghero
+        image: ankane/pghero
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: pghero-configmap
+          mountPath: /app/config/pghero.yml
+          readOnly: true
+          subPath: pghero.yml
+      volumes:
+      - name: pghero-configmap
+        configMap:
+          defaultMode: 0644
+          name: pghero
