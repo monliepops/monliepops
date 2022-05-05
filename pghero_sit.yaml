@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
       - name: pghero
-        image: ankane/pghero
+        image: ankane/pghero:latest
         imagePullPolicy: Always
         volumeMounts:
         - name: pghero-configmap
