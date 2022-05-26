@@ -82,7 +82,7 @@ spec:
           - "-c"
           - |
             set -ex
-            dgraph alpha whitelist 0.0.0.0/0 --my=$(hostname -f):7080 --zero dgraph-public.${POD_NAMESPACE}:5080
+            dgraph alpha --whitelist 0.0.0.0/0 --my=$(hostname -f):7080 --zero dgraph-public.${POD_NAMESPACE}:5080
       terminationGracePeriodSeconds: 60
       volumes:
       - name: datadir
