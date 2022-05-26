@@ -13,7 +13,7 @@ spec:
   - ReadWriteMany
   nfs:
     server: 10.3.105.69
-    path: "/share/nfs/database/cibdb"
+    path: "/var/nfs/k8sdev/database/cibdb"
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
