@@ -40,8 +40,6 @@ spec:
         - name: postgres
           persistentVolumeClaim:
             claimName: cibdb-pvc
-      imagePullSecrets:
-        - name: harbor-registry
 ---
     apiVersion: v1
     kind: Service
