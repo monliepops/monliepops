@@ -12,7 +12,7 @@ spec:
   accessModes:
   - ReadWriteMany
   nfs:
-    server: 10.3.113.169
+    server: 10.3.105.69
     path: "/share/nfs/database/cibdb"
 ---
 kind: PersistentVolumeClaim
