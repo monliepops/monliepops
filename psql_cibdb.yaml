@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: dpage/postgres:13.6
+          image: postgres:13.6
           imagePullPolicy: "IfNotPresent"
           resources:
             requests:
