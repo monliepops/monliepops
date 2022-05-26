@@ -68,8 +68,6 @@ spec:
         volumeMounts:
         - name: datadir
           mountPath: /dgraph
-        - name: tz-config
-          mountPath: '/etc/localtime'
         env:
           - name: POD_NAMESPACE
             valueFrom:
@@ -86,9 +84,6 @@ spec:
       - name: datadir
         persistentVolumeClaim:
           claimName: datadir
-      - name: tz-config
-          hostPath:
-            path: '/usr/share/zoneinfo/Asia/Bangkok'
   updateStrategy:
     type: RollingUpdate
   volumeClaimTemplates:
