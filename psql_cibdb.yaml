@@ -49,8 +49,8 @@ spec:
         app: postgres-cibdb
     spec:
        ports:
-        - name: postgres
+        - name: postgres-cibdb
           port: 5432
        type: NodePort
        selector:
-        app: postgres
+        app: postgres-cibdb
