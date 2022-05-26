@@ -1,0 +1,32 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: cibdb-pv
+  namespace: database
+  labels:
+    app: cibdb
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1G
+  accessModes:
+  - ReadWriteMany
+  nfs:
+    server: 10.3.113.169
+    path: "/share/nfs/database/cibdb"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: cibdb-pvc
+  namespace: database
+  labels:
+    app: cibdb
+spec:
+  volumeName: cibdb-pv
+  storageClassName: ""
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 100M
